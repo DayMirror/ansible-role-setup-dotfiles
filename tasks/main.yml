@@ -12,4 +12,5 @@
     depth: 1
 - name: Setting zsh as default shell
   shell: chsh -s $(which zsh)
+  ignore_errors: yes
 ...
