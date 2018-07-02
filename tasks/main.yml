@@ -15,7 +15,7 @@
   shell: rcup -v
   when: not dotfiles_folder.stat.exists
 
-- name: Checking if tmux plugins manager installed
+- name: Checking if tmux plugins manager is installed
   stat:
     path: ~/.tmux/plugins/tpm
   register: tmux_plugins_manager
@@ -27,6 +27,26 @@
     dest: ~/.tmux/plugins/tpm
     depth: 1
   when: not tmux_plugins_manager.stat.exists
+
+- name: Checking if vim-plug is installed
+  stat:
+    path: ~/.vim/autoload/plug.vim
+  register: vim_plug
+  changed_when: False
+
+- name: Installing vim-plug
+  shell: curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  when: not vim_plug.stat.exists
+
+- name: Checking if zplug is installed
+  stat:
+    path: ~/.zplug
+  register: zplug
+  changed_when: False
+
+- name: Installing zplug
+  shell: curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
+  when: not zplug.stat.exists
 
 - name: Checking default shell
   shell: echo $(basename $SHELL)
