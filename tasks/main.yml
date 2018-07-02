@@ -5,11 +5,11 @@
     dest: ~/.dotfiles
 - name: Setting up dotfiles links
   shell: rcup -v
-- name: Setting zsh as default shell
-  shell: chsh -s $(which zsh)
 - name: Installing tmux plugins manager
   git:
     repo: "{{ tpm_repo }}"
     dest: ~/.tmux/plugins/tpm
     depth: 1
+- name: Setting zsh as default shell
+  shell: chsh -s $(which zsh)
 ...
