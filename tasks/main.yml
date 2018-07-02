@@ -1,16 +1,40 @@
 ---
+- name: Checking if the dotfiles folder already exists
+  stat:
+    path: ~/.dotfiles
+  register: dotfiles_folder
+  changed_when: False
+
 - name: Cloning dotfiles
   git:
     repo: "{{ dotfiles_repo }}"
     dest: ~/.dotfiles
+  when: not dotfiles_folder.stat.exists
+
 - name: Setting up dotfiles links
   shell: rcup -v
+  when: not dotfiles_folder.stat.exists
+
+- name: Checking if tmux plugins manager installed
+  stat:
+    path: ~/.tmux/plugins/tpm
+  register: tmux_plugins_manager
+  changed_when: False
+
 - name: Installing tmux plugins manager
   git:
     repo: "{{ tpm_repo }}"
     dest: ~/.tmux/plugins/tpm
     depth: 1
+  when: not tmux_plugins_manager.stat.exists
+
+- name: Checking default shell
+  shell: echo $(basename $SHELL)
+  register: default_shell
+  changed_when: False
+
 - name: Setting zsh as default shell
   shell: chsh -s $(which zsh)
   ignore_errors: yes
+  when: default_shell.stdout != 'zsh'
 ...
