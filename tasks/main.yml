@@ -54,7 +54,7 @@
   changed_when: False
 
 - name: Setting zsh as default shell
-  shell: chsh -s $(which zsh)
+  shell: chsh -s /bin/zsh
   ignore_errors: yes
   when: default_shell.stdout != 'zsh'
 ...
