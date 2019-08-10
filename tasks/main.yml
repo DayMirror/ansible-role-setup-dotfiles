@@ -57,11 +57,4 @@
   shell: chsh -s /bin/zsh
   ignore_errors: yes
   when: default_shell.stdout != 'zsh'
-
-- name: Generating ssh keys
-  openssh_keypair:
-    path: ~/.ssh/id_rsa
-    force: no
-    type: rsa
-    size: 2048
 ...
