@@ -9,6 +9,7 @@
   git:
     repo: "{{ dotfiles_repo }}"
     dest: ~/.dotfiles
+    accept_newhostkey: true
   when: not dotfiles_folder.stat.exists
 
 - name: Setting up dotfiles links
