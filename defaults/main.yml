@@ -1,4 +1,4 @@
 ---
-dotfiles_repo: git@github.com:DayMirror/dotfiles.git
+dotfiles_repo: https://github.com/DayMirror/dotfiles.git
 tpm_repo: https://github.com/tmux-plugins/tpm
 ...
